@@ -7,7 +7,7 @@ import {IPool} from "../interfaces/aave-v3/IPool.sol";
 import {POOL} from "../Constants.sol";
 
 contract Flash {
-    error Flash_NotPool();
+    error Flash__NotPool();
     error Flash__ThisContractIsNotTheInitiator();
 
     IPool public constant pool = IPool(POOL);
@@ -44,7 +44,7 @@ contract Flash {
         address caller = abi.decode(callerBytes, (address));
         // flash loan fee from this caller
         IERC20(asset).transferFrom(caller, address(this), amount);
-        
+
         // Task 2.4 - Approve the pool to spend flash loaned amount + fee
         IERC20(asset).approve(address(pool), amount + fee);
         // Task 2.5 - Return true
